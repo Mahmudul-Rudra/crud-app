@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
 import connectDB from "./config/connectDB.js";
+import moneyManagementRoutes from "./Routes/moneyManagementRoutes.js";
 
 //Load environment variables from .env file
 dotenv.config();
@@ -24,3 +25,6 @@ app.listen(process.env.PORT || 8080, () => {
     `Server is running on port ${process.env.PORT || 8080}`.bgBlue.white
   );
 });
+
+//routes
+app.use("/api/moneyManagement", moneyManagementRoutes);

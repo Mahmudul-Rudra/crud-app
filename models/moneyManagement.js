@@ -21,3 +21,10 @@ const moneyManagementSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+const MoneyManagement = mongoose.model(
+  "MoneyManagement",
+  moneyManagementSchema
+);
+
+export default MoneyManagement;
