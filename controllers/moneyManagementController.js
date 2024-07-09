@@ -15,7 +15,7 @@ export const allMoneyManagement = async (req, res) => {
 
 // Add a new money management
 export const addMoneyManagement = async (req, res) => {
-  const { name, money_remaining, money_spent, reason } = req.body;
+  let { name, money_remaining, money_spent, reason } = req.body;
   let emptyFields = [];
   if (!name) {
     emptyFields.push("Name");
@@ -37,6 +37,8 @@ export const addMoneyManagement = async (req, res) => {
   }
 
   try {
+    money_remaining = money_remaining - money_spent;
+
     const moneyManagement = await MoneyManagement.create({
       name,
       money_remaining,
