@@ -74,3 +74,28 @@ export const deleteMoneyManagement = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// Update a single Money Management
+export const updateMoneyManagement = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such info exist" });
+  }
+
+  try {
+    const moneyManagement = await MoneyManagement.findByIdAndUpdate(
+      { _id: id },
+      { ...req.body }
+    );
+
+    if (moneyManagement) {
+      res.status(200).json({
+        message: "Money Management info updated successfully",
+        data: moneyManagement,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
